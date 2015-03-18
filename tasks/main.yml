@@ -6,6 +6,7 @@
   command: "{{ pip }} --version"
   ignore_errors: true
   register: pip_is_installed
+  changed_when: false
 
 - name: download pip
   get_url: url=https://raw.github.com/pypa/pip/master/contrib/get-pip.py dest={{ pip_download_dest }}
@@ -25,6 +26,7 @@
 - name: check to see if pip is installed at the correct version
   shell: "{{ pip }} --version | awk '{print $2}'"
   register: pip_installed_version
+  changed_when: false
   when: pip_version != None
 
 - name: install required version of pip
